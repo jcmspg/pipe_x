@@ -1,4 +1,3 @@
-# Colors
 RED = \033[0;31m
 GREEN = \033[0;32m
 CYAN = \033[0;36m
@@ -14,15 +13,16 @@ CC = cc
 
 # Flags
 CFLAGS = -Wall -Wextra -Werror -g
-POSTCC = -I $(INC_DIR)
+POSTCC = -I $(INC_DIR) -L $(LIB_DIR) -lft
 
-# Sources
-SRC_DRC = ./src
+# Directories
+SRC_DIR = ./src
 OBJ_DIR = ./obj
 INC_DIR = ./inc
 BONUS_DIR = ./bonus
+LIB_DIR = $(INC_DIR)/lib_ft
 
-# Files
+# Source and bonus files
 SRC_FILES = $(shell find $(SRC_DIR) -name "*.c")
 BONUS_FILES = $(shell find $(BONUS_DIR) -name "*.c")
 
@@ -37,23 +37,23 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 # Rule to compile the project
 $(NAME): $(OBJ_DIR) $(OBJ_FILES)
-	@echo "$(YELLOW)Building project...$(NO_COLOR)"
+	@echo "$(YELLOW)Building project...$(NOCOLOR)"
 	@$(CC) $(CFLAGS) $(POSTCC) $(OBJ_FILES) -o $(NAME)
-	@echo "$(GREEN)Project built successfully.$(NO_COLOR)"
+	@echo "$(GREEN)Project built successfully.$(NOCOLOR)"
 
 # Rule to build the included library
+LIBS = $(LIB_DIR)/libft.a
+
 $(LIBS):
-	@echo "$(YELLOW)Building libraries...$(NO_COLOR)"
-	@make -C $(INC_DIR)/lib_ft > /dev/null 2>&1 || { echo -e "$(RED)Failed to build lib_ft$(NO_COLOR)"; exit 1; }
-	@make -C $(INC_DIR)/ft_printf > /dev/null 2>&1 || { echo -e "$(RED)Failed to build ft_printf$(NO_COLOR)"; exit 1; }
-	@echo "$(GREEN)Libraries built successfully.$(NO_COLOR)"
+	@echo "$(YELLOW)Building libraries...$(NOCOLOR)"
+	@make -s -C $(LIB_DIR) all || { echo -e "$(RED)Failed to build lib_ft$(NOCOLOR)"; exit 1; }
+	@echo "$(GREEN)Libraries built successfully.$(NOCOLOR)"
 
 # Rule to build bonus
 $(BONUS): $(OBJ_DIR) $(OBJ_FILES)
-	@echo "$(YELLOW)Building bonus...$(NO_COLOR)"
+	@echo "$(YELLOW)Building bonus...$(NOCOLOR)"
 	@$(CC) $(CFLAGS) $(POSTCC) $(OBJ_FILES) -o $(NAME)
-	@echo "$(GREEN)Bonus built successfully.$(NO_COLOR)"
-
+	@echo "$(GREEN)Bonus built successfully.$(NOCOLOR)"
 
 # build only the library
 libs: $(LIBS)
@@ -70,16 +70,14 @@ all: libs build bonus
 # clean the object files
 clean:
 	@rm -rf $(OBJ_DIR)
-	@make clean -C $(INC_DIR)/lib_ft
-	@make clean -C $(INC_DIR)/ft_printf
-	@echo "$(BLUE)Object files removed.$(NO_COLOR)"
+	@make clean -C $(LIB_DIR)
+	@echo "$(BLUE)Object files removed.$(NOCOLOR)"
 
 # clean the object files and the project
 fclean: clean
 	@rm -f $(NAME)
-	@make fclean -C $(INC_DIR)/lib_ft
-	@make fclean -C $(INC_DIR)/ft_printf
-	@echo "$(BLUE)Project removed.$(NO_COLOR)"
+	@make fclean -C $(LIB_DIR)
+	@echo "$(BLUE)Project removed.$(NOCOLOR)"
 
 # clean and rebuild the project
 re: fclean all
@@ -89,3 +87,4 @@ run: build
 	@./$(NAME)
 
 .PHONY: all clean fclean re run libs build bonus
+#s build bonus

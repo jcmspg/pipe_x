@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:29:09 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/14 20:59:39 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:20:33 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ size_t		ft_strlen(const char *str);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
 char		*ft_strrchr(const char *s, int c);
 char		*ft_strchr(const char *s, int c);
-char		*ft_strdup(char *src);
+char		*ft_strdup(const char *src);
 void		ft_bzero(void *s, size_t n);
 void		*ft_calloc(size_t nmemb, size_t size);
 void		*ft_memcpy(void *dest, const void *src, size_t n);

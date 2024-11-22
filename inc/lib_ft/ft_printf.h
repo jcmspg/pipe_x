@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:16:23 by joamiran          #+#    #+#             */
-/*   Updated: 2024/05/13 15:36:10 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:21:28 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	print_padding(t_data *data, int padding, char c);
 int		calculate_padding(t_data *data, int n);
 char	*ft_itoa_base(unsigned long n, int base);
 
-char	ft_toupper(char c);
+int	ft_toupper(int c);
 void	ft_strtoupper(char *str);
 
 #endif /* PRINTF_FT_H */

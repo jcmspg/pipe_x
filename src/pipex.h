@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/22 17:00:43 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:04:55 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,16 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include "../inc/lib_ft/libft.h"
+
+
+
+
+
+
+
+
+
+
 
 typedef struct fd_pipex
 {

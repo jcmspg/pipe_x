@@ -1,5 +1,9 @@
-RED = \033[0;31m
+# build all
+all: libs build bonus
+
+# Colors
 GREEN = \033[0;32m
+RED = \033[0;31m
 CYAN = \033[0;36m
 BLUE = \033[0;34m
 YELLOW = \033[0;33m
@@ -64,13 +68,11 @@ $(BONUS): $(OBJ_DIR) $(OBJ_FILES)
 libs: $(LIBS)
 
 # build the project
-build: $(NAME) $(LIBS)
+build: $(LIBS) $(NAME)
 
 # build bonus
-bonus: $(BONUS)
+bonus: $(LIBS) $(NAME) $(BONUS)
 
-# build all
-all: libs build bonus
 
 # clean the object files
 clean:
@@ -80,7 +82,7 @@ clean:
 
 # clean the object files and the project
 fclean: clean
-	@rm -f $(NAME)
+	@rm -f $(NAME) $(BONUS)
 	@make fclean -C $(LIB_DIR)
 	@echo "$(BLUE)Project removed.$(NOCOLOR)"
 

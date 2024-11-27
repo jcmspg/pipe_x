@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/26 21:00:23 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/27 20:44:03 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ typedef struct s_pipex
 	char		**envp;
 }				t_pipe;
 
-//main
-int             main(int argc, char **argv, char **envp);
+// main
+int				main(int argc, char **argv, char **envp);
 
-
+// pipe
+int             make_pipe(t_pipe *pipex);
 
 
 
@@ -66,11 +67,14 @@ int				assign_innoutfiles(t_pipe *pipex, int argc, char **argv);
 
 // parsing
 int				count_commands(int argc);
+int				set_comnargs(t_command *cmd, char *arg);
+
+char			*ft_strjoin2(char *paths, char *cmd);
 
 // init
 char			*find_command(char *cmd, char **envp);
 t_command		*new_command(void);
-void			assign_commands(t_pipe *pipex, char **argv);
+int				assign_commands(t_pipe *pipex, char **argv);
 t_pipe			*init_pipex(int argc, char **argv, char **envp);
 
 // free

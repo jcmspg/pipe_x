@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:43:40 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/26 21:00:01 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/27 20:22:06 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,3 +58,17 @@ int assign_innoutfiles(t_pipe *pipex, int argc, char **argv)
     }
     return (0);
 }
+
+char *ft_strjoin2(char *paths, char *cmd)
+{
+    char *path1;
+    char *path2;
+
+    path1 = ft_strjoin(paths, "/");
+    path2 = ft_strjoin(path1, cmd);
+
+    free(path1);
+    return (path2);
+}
+
+

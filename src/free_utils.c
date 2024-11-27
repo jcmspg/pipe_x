@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:38:10 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/26 20:45:03 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/27 19:45:26 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,16 @@ void free_split(char **split)
     int	i;
 
     i = 0;
-    while (split[i])
+
+    if (!split)
+        return ;
+    if (split[i])
     {
-        free(split[i]);
-        i++;
+        while (split[i])
+        {
+            free(split[i]);
+            i++;
+        }
     }
     free(split);
 }
@@ -37,8 +43,9 @@ void free_commands(t_pipe *pipex)
         free_split(pipex->cmds[i]->args);
         free(pipex->cmds[i]->path);
         free(pipex->cmds[i]->fd);
-        free(pipex->cmds);
+        free(pipex->cmds[i]);
     }
+    free(pipex->cmds);
 }
 
 

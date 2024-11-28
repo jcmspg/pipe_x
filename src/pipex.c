@@ -6,88 +6,83 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:01:27 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/27 21:03:22 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:08:49 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+static char	*get_env_var(char **envp, const char *name)
+{
+	int		i;
+	size_t	name_len;
 
+	name_len = ft_strlen(name);
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], name, name_len) == 0
+			&& envp[i][name_len] == '=')
+			return (envp[i] + name_len + 1);
+		i++;
+	}
+	return (NULL);
+}
 
-// create a pipe
-// |         fork the pipe
-// |         then i duplicate the parent process
-// close the pipe
-// work with the child process
+static int	validation(int argc, char **argv, char **envp)
+{
+	char	*path_env;
 
-
-
+	if (!envp || !*envp || envp[0] == NULL || envp[0][0] == '\0')
+	{
+		ft_printf("Error: No environment\n");
+		return (1);
+	}
+	path_env = get_env_var(envp, "PATH");
+	if (!path_env || !*path_env || path_env[0] == '\0')
+	{
+		ft_printf("Error: No PATH variable in environment\n");
+		return (1);
+	}
+	if (params_check(argc, argv) == 1)
+	{
+		ft_printf("Error: Invalid parameters\n");
+		return (1);
+	}
+	return (0);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
-    t_pipe  *pipex;
+	t_pipe	*pipex;
+    int i;
+
+	if (validation(argc, argv, envp) == 1)
+		return (1);
+	pipex = init_pipex(argc, argv, envp);
+	if (!pipex)
+		return (1);
+	print_info(pipex);
     
-    pipex = init_pipex(argc, argv, envp);
-    if (!pipex)
-        return (1);
-
-    ft_printf("pipex successfully initialized\n");
-
-    // create the pipes
-    if (make_pipe(pipex) != 0)
+    i = 0;
+    while (i < pipex->n_cmds)
     {
-        free_pipex(pipex);
-        return (1);
-    }
-    ft_printf("pipes successfully created\n");
-
-
-    // fork the pipe
-    
-    // print the pipe structure AND ITS CONTENTS
-    ft_printf("infile: %d\n", pipex->infile);
-    ft_printf("outfile: %d\n", pipex->outfile);
-   
-    for (int i = 0; i < pipex->n_cmds; i++)
-    {
-        ft_printf("cmd: %s\n", pipex->cmds[i]->cmd);
-        ft_printf("path: %s\n", pipex->cmds[i]->path);
-
-        // print the args of the command
-        ft_printf("args: ");
-    
-        char **args = pipex->cmds[i]->args;  // Create a temporary pointer for iteration
-        if (args)
+        if (make_pipe(pipex, i) != 0)
         {
-            while (*args)
-            {
-                ft_printf("%s ", *args);  // Print each argument
-                args++;  // Move to the next argument
-            }
+            free_pipex(pipex);
+            return (1);
         }
-        ft_printf("\n");
-
-        ft_printf("fds: %d %d\n", pipex->cmds[i]->fd->fd[0], pipex->cmds[i]->fd->fd[1]);
+        i++;
+    }
+    i = 0;
+    while (i < pipex->n_cmds)
+    {
+        waitpid(pipex->pid[i], NULL, 0);
+        i++;
     }
 
-
-
-
-
-    // close the pipe
-    
-    close(pipex->infile);
-    close(pipex->outfile);
-
-    //print all the commands and their arguments
-
-
-
-    // free everything
-    free_pipex(pipex);
-    
-    ft_printf("pipex successfully freed\n");
-
-
-    return (0);
+	close(pipex->infile);
+	close(pipex->outfile);
+	free_pipex(pipex);
+	return (0);
 }

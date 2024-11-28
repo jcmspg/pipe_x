@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 21:28:13 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/28 21:41:15 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/28 21:57:52 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ int init_fds(t_pipe *pipex)
         pipex->cmds[i]->fd = (t_fd *)ft_calloc(sizeof(t_fd), 1);
         if (!pipex->cmds[i]->fd)
             return (1);
+        ft_printf("command %d\n", i);
+        ft_printf("fd[1] = %p\n", (&pipex->cmds[i]->fd->fd[1]));
+        ft_printf("fd[0] = %p\n", (&pipex->cmds[i]->fd->fd[0]));
         i++;
     }
     return (0);

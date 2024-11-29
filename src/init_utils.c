@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:03:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/28 21:27:57 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:04:20 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	assign_commands(t_pipe *pipex, char **argv)
 		path = find_command(pipex->cmds[i]->cmd, pipex->envp);
 		pipex->cmds[i]->path = path;
 		pipex->cmds[i]->done = false;
-        pipex->cmds[i]->cmd_nr = i;
+		pipex->cmds[i]->cmd_nr = i;
 		i++;
 	}
 	return (0);
@@ -113,11 +113,5 @@ t_pipe	*init_pipex(int argc, char **argv, char **envp)
 		free(pipex);
 		return (NULL);
 	}
-    if (init_fds(pipex) != 0)
-    {
-        free_pipex(pipex);
-        return (NULL);
-    }
-
-    return (pipex);
+	return (pipex);
 }

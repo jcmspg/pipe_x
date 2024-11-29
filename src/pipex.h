@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/28 21:34:52 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:56:09 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,11 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-typedef struct s_fd
-{
-	int			fd[2];
-}				t_fd;
-
 typedef struct s_command
 {
 	char		*cmd;
 	int			cmd_nr;
-	t_fd		*fd;
-	char		**args;
+    char		**args;
 	char		*path;
 	pid_t		pid;
 	bool		done;
@@ -45,6 +39,7 @@ typedef struct s_pipex
 {
 	t_command	**cmds;
 	int			n_cmds;
+    int         fd[2];
 	pid_t		*pid;
 	int			infile;
 	int			outfile;
@@ -55,8 +50,12 @@ typedef struct s_pipex
 // main
 int				main(int argc, char **argv, char **envp);
 
-// pipe
-int				make_pipe(t_pipe *pipex, int i);
+// pipe_utils
+int             make_pipe(t_pipe *pipex, int i);
+int             process_command(t_pipe *pipex, int i, int prev_fd);
+void            wait_for_children(t_pipe *pipex);
+void            close_pipe(t_pipe *pipex);
+
 
 // checkers
 int				arg_check(int argc);

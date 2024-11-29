@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:01:27 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/28 21:08:49 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:59:54 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,18 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipe	*pipex;
     int i;
+    int prev_fd;
+
+    prev_fd = -1;
 
 	if (validation(argc, argv, envp) == 1)
 		return (1);
+
 	pipex = init_pipex(argc, argv, envp);
 	if (!pipex)
 		return (1);
-	print_info(pipex);
+	
+    print_info(pipex);
     
     i = 0;
     while (i < pipex->n_cmds)
@@ -72,14 +77,18 @@ int	main(int argc, char **argv, char **envp)
             free_pipex(pipex);
             return (1);
         }
+        if (process_command(pipex, i, prev_fd) != 0)
+        {
+            free_pipex(pipex);
+            return (1);
+        }
+        if (i > 0)
+            close(prev_fd);
+        prev_fd = pipex->fd[0];
         i++;
     }
-    i = 0;
-    while (i < pipex->n_cmds)
-    {
-        waitpid(pipex->pid[i], NULL, 0);
-        i++;
-    }
+    
+  //  wait_for_children(pipex);
 
 	close(pipex->infile);
 	close(pipex->outfile);

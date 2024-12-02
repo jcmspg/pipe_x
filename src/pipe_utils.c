@@ -6,64 +6,21 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 20:35:56 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/29 20:02:03 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:59:14 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 // make pipe
-int	make_pipe(t_pipe *pipex, int i)
+int	make_pipe(t_pipe *pipex)
 {
-    if (i < pipex->n_cmds - 1)
-    {
-        if (pipe(pipex->fd) == -1)
-        {
-            ft_printf("Error: pipe failed\n");
-            return (1);
-        }
-    }
-    return (0);
-}
-
-// fork the process
-int	process_command(t_pipe *pipex, int i, int prev_fd)
-{
-	pipex->cmds[i]->pid = fork();
-	if (pipex->cmds[i]->pid == -1)
+	if (pipex->n_cmds > 1)
 	{
-		ft_printf("Error: fork failed\n");
-		return (1);
-	}
-	if (pipex->cmds[i]->pid == 0)
-	{
-		if (i == 0)
-			dup2(pipex->infile, STDIN_FILENO);
-		else
-			dup2(prev_fd, STDIN_FILENO);
-		if (i == pipex->n_cmds - 1)
-			dup2(pipex->outfile, STDOUT_FILENO);
-		else
-			dup2(pipex->fd[1], STDOUT_FILENO);
-		close(pipex->fd[0]);
-		close(pipex->fd[1]);
-		if (pipex->cmds[i]->path != NULL)
-			execve(pipex->cmds[i]->path, pipex->cmds[i]->args, pipex->envp);
+		if (pipe(pipex->fd) == -1)
+			return (ft_printf("Error: pipe failed\n"));
 	}
 	return (0);
-}
-
-// wait for the child process to finish
-void	wait_for_children(t_pipe *pipex)
-{
-	int	i;
-
-	i = 0;
-	while (i < pipex->n_cmds)
-	{
-		waitpid(pipex->cmds[i]->pid, NULL, 0);
-		i++;
-	}
 }
 
 // close the pipe
@@ -71,4 +28,54 @@ void	close_pipe(t_pipe *pipex)
 {
 	close(pipex->fd[0]);
 	close(pipex->fd[1]);
+}
+
+// fork the process
+int	process_command(t_pipe *pipex, int cmd_index)
+{
+	if (cmd_index == 0)
+	{
+		dup2(pipex->infile, STDIN_FILENO);
+		dup2(pipex->fd[1], STDOUT_FILENO);
+	}
+	else if (cmd_index == pipex->n_cmds - 1)
+	{
+		dup2(pipex->outfile, STDOUT_FILENO);
+		dup2(pipex->fd[0], STDIN_FILENO);
+	}
+	else
+	{
+		dup2(pipex->fd[0], STDIN_FILENO);
+		dup2(pipex->fd[1], STDOUT_FILENO);
+	}
+	close_pipe(pipex);
+	close(pipex->infile);
+	close(pipex->outfile);
+	if (!pipex->cmds[cmd_index]->path)
+		return (ft_printf("Error: command not found\n"));
+	if (execve(pipex->cmds[cmd_index]->path, pipex->cmds[cmd_index]->args,
+			pipex->envp) == -1)
+		return (ft_printf("Error: execve failed\n"));
+	return (0);
+}
+
+void close_correct_pipe(t_pipe *pipex, int cmd_index)
+{
+    if (cmd_index == 0)
+        close(pipex->fd[1]);
+    else if (cmd_index == pipex->n_cmds - 1)
+        close(pipex->fd[0]);
+    else
+    {
+        close(pipex->fd[0]);
+        close(pipex->fd[1]);
+    }
+}
+
+void clean_house(t_pipe *pipex)
+{
+    close_pipe(pipex);
+    close(pipex->infile);
+    close(pipex->outfile);
+    free_pipex(pipex);
 }

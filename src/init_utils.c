@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:03:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/29 19:04:20 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:48:17 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_command	*new_command(void)
 	if (!cmd)
 		return (NULL);
 	cmd->args = NULL;
-	cmd->done = false;
+	cmd->status = -1;
 	return (cmd);
 }
 
@@ -81,7 +81,7 @@ int	assign_commands(t_pipe *pipex, char **argv)
 			return (1);
 		path = find_command(pipex->cmds[i]->cmd, pipex->envp);
 		pipex->cmds[i]->path = path;
-		pipex->cmds[i]->done = false;
+		pipex->cmds[i]->status = -1;
 		pipex->cmds[i]->cmd_nr = i;
 		i++;
 	}

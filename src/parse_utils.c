@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:06:25 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/29 19:04:32 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:45:37 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	set_args(t_command *cmd, char *arg)
 	{
 		num_args++;
 	}
-	num_args--;
 	cmd->args = ft_calloc(sizeof(char *), num_args + 1);
 	if (!cmd->args)
 	{
@@ -60,9 +59,9 @@ int	set_args(t_command *cmd, char *arg)
 		free(cmd->cmd);
 		return (1);
 	}
-	while (split[i + 1])
+	while (split[i])
 	{
-		cmd->args[i] = ft_strdup(split[i + 1]);
+		cmd->args[i] = ft_strdup(split[i]);
 		if (!cmd->args[i])
 		{
 			free_split(cmd->args);

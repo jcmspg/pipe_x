@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:18:54 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/28 18:38:53 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:06:43 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	print_info(t_pipe *pipex)
 		}
 		ft_printf("\033[1;34mpath: \033[0m%s\n", pipex->cmds[i]->path);
 		ft_printf("\033[1;35mpid: \033[0m%d\n", pipex->cmds[i]->pid);
-		ft_printf("\033[1;31mdone: \033[0m%d\n", pipex->cmds[i]->done);
+		ft_printf("\033[1;31mdone: \033[0m%d\n", pipex->cmds[i]->status);
 		i++;
 		ft_printf("\n\033[1;37m-----------------\033[0m\n\n");
 	}

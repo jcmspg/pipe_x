@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:43:40 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/28 18:25:30 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:47:51 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,14 @@
 int	arg_check(int argc)
 {
 	if (argc < 5)
-	{
-		ft_printf("Error: Not enough arguments\n");
-		return (1);
-	}
+		return (ft_printf("Error: Not enough arguments\n"));
 	return (0);
 }
 
 int	file_access_check(char *file)
 {
 	if (access(file, F_OK) == -1)
-	{
-		ft_printf("Error: %s: No such file or directory\n", file);
-		return (1);
-	}
+		return (ft_printf("Error: %s: No such file or directory\n", file));
 	return (0);
 }
 
@@ -45,16 +39,13 @@ int	assign_innoutfiles(t_pipe *pipex, int argc, char **argv)
 {
 	pipex->infile = open(argv[1], O_RDONLY);
 	if (pipex->infile == -1)
-	{
-		ft_printf("Error: %s: No such file or directory\n", argv[1]);
-		return (1);
-	}
+		return (ft_printf("Error: %s: No such file or directory\n", argv[1]));
 	pipex->outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pipex->outfile == -1)
 	{
-		ft_printf("Error: %s: No such file or directory\n", argv[argc - 1]);
 		close(pipex->infile);
-		return (1);
+		return (ft_printf("Error: %s: No such file or directory\n", argv[argc
+				- 1]));
 	}
 	return (0);
 }

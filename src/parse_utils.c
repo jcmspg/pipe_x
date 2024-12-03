@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:06:25 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/02 19:45:37 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/03 18:37:27 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ int	set_commands(t_command *cmd, char *arg)
 	return (0);
 }
 
+static int	ft_flush(t_command *cmd, char **split)
+{
+	free_split(split);
+	free(cmd->cmd);
+	return (1);
+}
+
 int	set_args(t_command *cmd, char *arg)
 {
 	char	**split;
@@ -45,29 +52,21 @@ int	set_args(t_command *cmd, char *arg)
 
 	i = 0;
 	num_args = 0;
-	split = ft_split(arg, ' ');
+	split = ft_split2(arg, ' ');
 	if (!split)
 		return (1);
 	while (split[num_args])
-	{
 		num_args++;
-	}
 	cmd->args = ft_calloc(sizeof(char *), num_args + 1);
 	if (!cmd->args)
-	{
-		free_split(split);
-		free(cmd->cmd);
-		return (1);
-	}
+		return (ft_flush(cmd, split));
 	while (split[i])
 	{
 		cmd->args[i] = ft_strdup(split[i]);
 		if (!cmd->args[i])
 		{
 			free_split(cmd->args);
-			free(cmd->cmd);
-			free_split(split);
-			return (1);
+			return (ft_flush(cmd, split));
 		}
 		i++;
 	}
@@ -78,9 +77,7 @@ int	set_args(t_command *cmd, char *arg)
 
 int	set_comnargs(t_command *cmd, char *arg)
 {
-	if (!cmd)
-		return (1);
-	if (!arg)
+	if (!cmd || !arg)
 		return (1);
 	if (set_commands(cmd, arg) == 1 || set_args(cmd, arg) == 1)
 		return (1);

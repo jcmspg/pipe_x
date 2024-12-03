@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/02 20:59:33 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/03 21:01:27 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_command
 	char		**args;
 	char		*path;
 	pid_t		pid;
+    int         fd[2];
 	int			status;
 }				t_command;
 
@@ -39,7 +40,6 @@ typedef struct s_pipex
 {
 	t_command	**cmds;
 	int			n_cmds;
-	int			fd[2];
 	pid_t		*pid;
 	int			infile;
 	int			outfile;
@@ -47,15 +47,27 @@ typedef struct s_pipex
 	char		**envp;
 }				t_pipe;
 
+typedef struct s_split_state
+{
+	char		**split;
+	int			i;
+	int			j;
+}				t_split_state;
+
 // main
 int				main(int argc, char **argv, char **envp);
 
 // pipe_utils
-int				make_pipe(t_pipe *pipex);
+t_pipe          *piping(int argc, char **argv, char **envp);
+int				make_pipes(t_pipe *pipex);
 int				process_command(t_pipe *pipex, int cmd_index);
+void            forking(t_pipe *pipex);
 void			wait_for_children(t_pipe *pipex);
-void			close_pipe(t_pipe *pipex);
+void			close_pipe(t_pipe *pipex, int cmd_index);
+void            close_pipes(t_pipe *pipex);
 void			close_correct_pipe(t_pipe *pipex, int cmd_index);
+void            wait_for_children(t_pipe *pipex);
+
 
 // checkers
 int				arg_check(int argc);
@@ -68,8 +80,11 @@ int				count_commands(int argc);
 int				set_commands(t_command *cmd, char *arg);
 int				set_args(t_command *cmd, char *arg);
 int				set_comnargs(t_command *cmd, char *arg);
-
+int				is_space(char c);
+int				is_quote(char c);
+char			**ft_split2(char const *s, char c);
 char			*ft_strjoin2(char *paths, char *cmd);
+void			remove_quotes(char **s);
 
 // init
 char			*find_command(char *cmd, char **envp);

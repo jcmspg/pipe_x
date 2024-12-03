@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:03:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/02 20:48:17 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/03 20:47:02 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ t_command	*new_command(void)
 		return (NULL);
 	cmd->args = NULL;
 	cmd->status = -1;
+    cmd->path = NULL;
 	return (cmd);
 }
 

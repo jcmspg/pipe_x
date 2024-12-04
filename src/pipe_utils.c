@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 20:35:56 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 21:28:24 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:48:53 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	make_pipes(t_pipe *pipex)
 	int	i;
 
 	i = 0;
-	while (i < pipex->n_cmds - 1)
+	while (i < pipex->n_cmds -1)
 	{
 		if (pipe(pipex->cmds[i]->fd) == -1)
 			return (ft_printf("Error: pipe failed\n"));

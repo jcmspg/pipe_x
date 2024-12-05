@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 21:01:27 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/05 19:19:16 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void			wait_for_children(t_pipe *pipex);
 void			close_pipe(t_pipe *pipex, int cmd_index);
 void            close_pipes(t_pipe *pipex);
 void			close_correct_pipe(t_pipe *pipex, int cmd_index);
+void            dup_handles(t_pipe *pipex, int cmd_index);
 void            wait_for_children(t_pipe *pipex);
 
 

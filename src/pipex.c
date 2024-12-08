@@ -15,9 +15,7 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_pipe	*pipex;
-	int		i;
 
-	i = 0;
 	pipex = piping(argc, argv, envp);
 //	while (i < pipex->n_cmds)
 //	{

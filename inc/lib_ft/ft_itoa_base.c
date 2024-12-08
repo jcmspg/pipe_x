@@ -31,13 +31,13 @@ char	*ft_itoa_base(unsigned long value, int base)
 {
 	char			*str;
 	char			*base_string;
-	unsigned long	nbr;
+	long long	nbr;
 	int				len;
 
 	base_string = "0123456789abcdef";
 	if (base < 2 || base > 16)
 		return (NULL);
-	nbr = value;
+	nbr = (long)value;
 	len = ft_nbrlen_base(nbr, base);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!str)

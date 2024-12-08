@@ -67,11 +67,9 @@ t_command	*new_command(void)
 int	assign_commands(t_pipe *pipex, char **argv)
 {
 	int		i;
-	int		j;
 	char	*path;
 
 	i = 0;
-	j = 0;
 	while (i < pipex->n_cmds)
 	{
 		pipex->cmds[i] = new_command();

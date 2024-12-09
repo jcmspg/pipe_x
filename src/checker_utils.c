@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:43:40 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 18:36:54 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:45:15 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	params_check(int argc, char **argv)
 {
 	if (arg_check(argc))
 		return (1);
-	if (file_access_check(argv[1]) || file_access_check(argv[argc - 1]))
+	if (file_access_check(argv[1]))
 		return (1);
 	return (0);
 }

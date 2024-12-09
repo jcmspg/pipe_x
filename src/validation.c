@@ -6,13 +6,13 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:54:10 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 20:58:03 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:40:59 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*get_env_var(char **envp, const char *name)
+char	*get_env_var(char **envp, const char *name)
 {
 	int		i;
 	size_t	name_len;
@@ -43,20 +43,20 @@ static int	validation(int argc, char **argv, char **envp)
 	return (0);
 }
 
-t_pipe *piping(int argc, char **argv, char **envp)
+t_pipe	*piping(int argc, char **argv, char **envp)
 {
-    t_pipe *pipex;
+	t_pipe	*pipex;
 
-    if (validation(argc, argv, envp) == 1)
-        return (NULL);
-    pipex = init_pipex(argc, argv, envp);
-    if (!pipex)
-        return (NULL);
-    if (make_pipes(pipex) != 0)
-    {
-        free_pipex(pipex);
-        ft_printf("Error: pipe failed\n");
-        return (NULL);
-    }
-    return (pipex);
+	if (validation(argc, argv, envp) == 1)
+		return (NULL);
+	pipex = init_pipex(argc, argv, envp);
+	if (!pipex)
+		return (NULL);
+	if (make_pipes(pipex) != 0)
+	{
+		free_pipex(pipex);
+		ft_printf("Error: pipe failed\n");
+		return (NULL);
+	}
+	return (pipex);
 }

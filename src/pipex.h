@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/05 19:19:16 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:14:06 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <unistd.h>
 
 # define HEREDOC "here_doc"
-# define TEMP_FILE "/tmp/.heredoc_tmp"
+# define TEMP_FILE ".heredoc_tmp"
 
 typedef struct s_command
 {
@@ -35,7 +35,7 @@ typedef struct s_command
 	char		**args;
 	char		*path;
 	pid_t		pid;
-    int         fd[2];
+	int			fd[2];
 	int			status;
 }				t_command;
 
@@ -59,30 +59,36 @@ typedef struct s_split_state
 
 // main
 int				main(int argc, char **argv, char **envp);
-void            ft_pipex(int argc, char **argv, char **envp);
+void			ft_pipex(int argc, char **argv, char **envp);
 
 // here_doc
-void       handle_hd(char *limiter, int fd);
-void       ft_here_doc(int argc, char **argv, char **envp);
+void			handle_hd(char *limiter, int fd);
+void			ft_here_doc(int argc, char **argv, char **envp);
+int				setup_heredoc(char *limiter);
+t_pipe			*piping_hd(int argc, char **argv, char **envp);
+int				assign_commands_hd(t_pipe *pipex, char **argv);
+t_pipe			*init_pipex_hd(int argc, char **argv, char **envp);
+int				validation_hd(int argc, char **argv, char **envp);
+int				assign_innoutfiles_hd(t_pipe *pipex, int argc, char **argv);
 
 // pipe_utils
-t_pipe          *piping(int argc, char **argv, char **envp);
+t_pipe			*piping(int argc, char **argv, char **envp);
 int				make_pipes(t_pipe *pipex);
 int				process_command(t_pipe *pipex, int cmd_index);
-void            forking(t_pipe *pipex);
+void			forking(t_pipe *pipex);
 void			wait_for_children(t_pipe *pipex);
 void			close_pipe(t_pipe *pipex, int cmd_index);
-void            close_pipes(t_pipe *pipex);
+void			close_pipes(t_pipe *pipex);
 void			close_correct_pipe(t_pipe *pipex, int cmd_index);
-void            dup_handles(t_pipe *pipex, int cmd_index);
-void            wait_for_children(t_pipe *pipex);
-
+void			dup_handles(t_pipe *pipex, int cmd_index);
+void			wait_for_children(t_pipe *pipex);
 
 // checkers
 int				arg_check(int argc);
 int				file_access_check(char *file);
 int				params_check(int argc, char **argv);
 int				assign_innoutfiles(t_pipe *pipex, int argc, char **argv);
+char			*get_env_var(char **envp, const char *name);
 
 // parsing
 int				count_commands(int argc);
@@ -107,8 +113,9 @@ void			free_split(char **split);
 void			free_commands(t_pipe *pipex);
 void			free_pipex(t_pipe *pipex);
 void			clean_house(t_pipe *pipex);
+
 // debug
 void			print_info(t_pipe *pipex);
-void            exit_error(t_pipe *pipex, char *msg);
+void			exit_error(t_pipe *pipex, char *msg);
 
 #endif

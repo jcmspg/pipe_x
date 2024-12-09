@@ -25,6 +25,9 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+# define HEREDOC "here_doc"
+# define TEMP_FILE "/tmp/.heredoc_tmp"
+
 typedef struct s_command
 {
 	char		*cmd;
@@ -56,6 +59,11 @@ typedef struct s_split_state
 
 // main
 int				main(int argc, char **argv, char **envp);
+void            ft_pipex(int argc, char **argv, char **envp);
+
+// here_doc
+void       handle_hd(char *limiter, int fd);
+void       ft_here_doc(int argc, char **argv, char **envp);
 
 // pipe_utils
 t_pipe          *piping(int argc, char **argv, char **envp);
@@ -101,5 +109,6 @@ void			free_pipex(t_pipe *pipex);
 void			clean_house(t_pipe *pipex);
 // debug
 void			print_info(t_pipe *pipex);
+void            exit_error(t_pipe *pipex, char *msg);
 
 #endif

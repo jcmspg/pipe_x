@@ -41,3 +41,11 @@ void	print_info(t_pipe *pipex)
 	ft_printf("\n\033[1;37m-----------------\033[0m\n\n");
 	ft_printf("\033[1;32mdone\033[0m\n");
 }
+
+void exit_error(t_pipe *pipex, char *msg)
+{
+    ft_printf("\033[1;31m%s\033[0m\n", msg);
+    if (pipex)
+        clean_house(pipex);
+    exit(1);
+}

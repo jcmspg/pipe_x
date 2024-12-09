@@ -12,22 +12,13 @@
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+
+void    ft_pipex(int argc, char **argv, char **envp)
 {
 	t_pipe	*pipex;
 
 	pipex = piping(argc, argv, envp);
-//	while (i < pipex->n_cmds)
-//	{
-//		pipex->cmds[i]->pid = fork();
-//		if (pipex->cmds[i]->pid == -1)
-//			return (ft_printf("Error: fork failed\n"));
-//		if (pipex->cmds[i]->pid == 0)
-//			process_command(pipex, i);
-//		i++;
-//	}
     forking(pipex);
 	wait_for_children(pipex);
 	clean_house(pipex);
-	return (0);
 }

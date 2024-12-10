@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/10 17:19:27 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 20:34:00 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:50:10 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ int	is_valid_cmd_format(char *cmd)
 {
 	size_t	len;
 	size_t	i;
+	bool	is_valid;
 
+	is_valid = false;
 	if (!cmd || cmd[0] == '\0')
 		return (1);
 	len = ft_strlen(cmd);
@@ -25,8 +27,12 @@ int	is_valid_cmd_format(char *cmd)
 	{
 		if (cmd[i] == '\n' || cmd[i] == '\t')
 			return (1);
+		if (cmd[i] != ' ')
+			is_valid = true;
 		i++;
 	}
+	if (!is_valid)
+		return (1);
 	return (0);
 }
 

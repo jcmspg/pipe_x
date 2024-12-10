@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 21:45:29 by joamiran          #+#    #+#             */
-/*   Updated: 2024/05/07 20:49:49 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:10:52 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,16 @@ void	ft_print_type(t_data *data)
 		ft_print_xx(data, va_arg(data->ap, unsigned int), 1);
 	else if (data->format.type == '%')
 		ft_print_percent(data);
+}
+
+void	ft_print_type_fd(t_data *data, int fd)
+{
+	if (data->format.type == 'c')
+		ft_print_char_fd(data, (va_arg(data->ap, int)), fd);
+	else if (data->format.type == 's')
+		ft_print_str_fd(data, va_arg(data->ap, char *), fd);
+	else if (data->format.type == 'd' || data->format.type == 'i')
+		ft_print_id_fd(data, va_arg(data->ap, int), fd);
+	else if (data->format.type == '%')
+		ft_print_percent_fd(data, fd);
 }

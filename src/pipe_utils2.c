@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:51:33 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/09 22:02:33 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:41:16 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,13 @@ int	process_command(t_pipe *pipex, int cmd_index)
     close_pipes(pipex);
     close(pipex->infile);
     close(pipex->outfile);
+    if (pipex->cmds[cmd_index]->path == NULL)
+    {
+        ft_printf_fd(2, "Error: command not found: %s\n",
+            pipex->cmds[cmd_index]->cmd);
+        clean_house(pipex);
+        return (1);
+    }
 	(execve(pipex->cmds[cmd_index]->path, pipex->cmds[cmd_index]->args,
 			pipex->envp));
 	return (0);
@@ -75,10 +82,13 @@ void	forking(t_pipe *pipex)
 	{
 		pipex->cmds[i]->pid = fork();
 		if (pipex->cmds[i]->pid == 0)
-			process_command(pipex, i);
+        {
+			if (process_command(pipex, i) != 0)
+                exit(1);
+        }
 		else if (pipex->cmds[i]->pid < 0)
 		{
-			printf("Error: fork failed\n");
+			ft_printf_fd(2, "Error: fork failed\n");
 			exit(1);
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:56:07 by joamiran          #+#    #+#             */
-/*   Updated: 2024/05/07 20:49:29 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:55:15 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,28 @@ void	ft_print_char(t_data *data, int c)
 		if (ft_write(c) >= 0)
 			data->chars_printed++;
 	}
+}
+
+void    ft_print_char_fd(t_data *data, int c, int fd)
+{
+    int	padding;
+
+    padding = 0;
+    data->format.zero_padding = 0;
+    if (data->format.width > 1)
+        padding = data->format.width - 1;
+    if (padding > 0)
+    {
+        if (!data->format.minus_sign)
+            ft_print_padding_fd(data, padding, ' ', fd);
+        if (ft_write_fd(c, fd) >= 0)
+            data->chars_printed++;
+        if (data->format.minus_sign)
+            ft_print_padding_fd(data, padding, ' ', fd);
+    }
+    else
+    {
+        if (ft_write_fd(c, fd) >= 0)
+            data->chars_printed++;
+    }
 }

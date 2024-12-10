@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/12 16:29:09 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/22 17:20:33 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/10 21:12:38 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ void		ft_lstiter(t_list *lst, void (*f)(void *));
 
 int ft_strcmp(const char *s1, const char *s2);
 long ft_atol(const char *str);
+
+
+
 
 
 

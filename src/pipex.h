@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/09 19:14:06 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/10 17:39:17 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,21 @@ void			close_correct_pipe(t_pipe *pipex, int cmd_index);
 void			dup_handles(t_pipe *pipex, int cmd_index);
 void			wait_for_children(t_pipe *pipex);
 
+// security
+int             is_valid_cmd_format(char *cmd);
+int             check_for_here_doc(char *cmd);
+int             validate_here_doc_format(int argc, char **argv);
+int             validade_all_commands(int argc, char **argv);
+int             validate_call(int argc, char **argv, char **envp);
+
 // checkers
 int				arg_check(int argc);
 int				file_access_check(char *file);
 int				params_check(int argc, char **argv);
 int				assign_innoutfiles(t_pipe *pipex, int argc, char **argv);
 char			*get_env_var(char **envp, const char *name);
+
+
 
 // parsing
 int				count_commands(int argc);

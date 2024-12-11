@@ -47,7 +47,8 @@ SRC_FILES = $(SRC_DIR)/free_utils.c\
 			$(SRC_DIR)/init_utils.c\
 			$(SRC_DIR)/parse_utils.c\
 			$(SRC_DIR)/debug_utils.c\
-			$(SRC_DIR)/init_utils2.c
+			$(SRC_DIR)/init_utils2.c\
+			$(SRC_DIR)/security2.c\
 
 
 # Object directory

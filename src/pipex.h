@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/11 20:55:40 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:14:14 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ int				check_for_here_doc(char *cmd);
 int				validate_here_doc_format(int argc, char **argv);
 int				validade_all_commands(int argc, char **argv);
 int				validate_call(int argc, char **argv, char **envp);
-int             check_file_permissions(int argc, char **argv);
-
+int				check_file_permissions(int argc, char **argv);
+int				check_for_out_permissions(int argc, char **argv);
 
 // checkers
 int				arg_check(int argc);

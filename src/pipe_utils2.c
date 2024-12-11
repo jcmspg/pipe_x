@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:51:33 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/11 20:47:19 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 21:49:04 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ int	process_command(t_pipe *pipex, int cmd_index)
 	return (0);
 }
 
+static void	close_piperino(t_pipe *pipex, int cmd_index)
+{
+	if (cmd_index > 0)
+		close(pipex->cmds[cmd_index - 1]->fd[0]);
+	if (cmd_index < pipex->n_cmds - 1)
+		close(pipex->cmds[cmd_index]->fd[1]);
+}
+
 void	wait_for_children(t_pipe *pipex)
 {
 	int	i;
@@ -78,12 +86,8 @@ void	forking(t_pipe *pipex)
 	int	i;
 
 	i = 0;
-    if (!pipex->cmds)
-    {
-        ft_printf_fd(2, "Error: command not found\n");
-        clean_house(pipex);
-        exit(1);
-    }
+	if (!pipex->cmds)
+        exit_error(pipex, "Error: no commands found");
 	while (i < pipex->n_cmds)
 	{
 		pipex->cmds[i]->pid = fork();
@@ -98,12 +102,7 @@ void	forking(t_pipe *pipex)
 			exit(1);
 		}
 		else
-		{
-			if (i > 0)
-				close(pipex->cmds[i - 1]->fd[0]);
-			if (i < pipex->n_cmds - 1)
-				close(pipex->cmds[i]->fd[1]);
-		}
+			close_piperino(pipex, i);
 		i++;
 	}
 }

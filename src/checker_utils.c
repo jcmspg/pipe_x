@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:43:40 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/09 19:45:15 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:34:44 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	assign_innoutfiles(t_pipe *pipex, int argc, char **argv)
 	if (pipex->outfile == -1)
 	{
 		close(pipex->infile);
-		return (ft_printf("Error: %s: No such file or directory\n", argv[argc
-				- 1]));
+		return (ft_printf("Error: %s: No such file or directory\n", \
+				argv[argc - 1]));
 	}
 	return (0);
 }

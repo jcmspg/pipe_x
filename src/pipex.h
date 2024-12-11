@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 18:09:34 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 17:39:17 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:34:29 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void			dup_handles(t_pipe *pipex, int cmd_index);
 void			wait_for_children(t_pipe *pipex);
 
 // security
-int             is_valid_cmd_format(char *cmd);
-int             check_for_here_doc(char *cmd);
-int             validate_here_doc_format(int argc, char **argv);
-int             validade_all_commands(int argc, char **argv);
-int             validate_call(int argc, char **argv, char **envp);
+int				is_valid_cmd_format(char *cmd);
+int				check_for_here_doc(char *cmd);
+int				validate_here_doc_format(int argc, char **argv);
+int				validade_all_commands(int argc, char **argv);
+int				validate_call(int argc, char **argv, char **envp);
 
 // checkers
 int				arg_check(int argc);
@@ -96,8 +96,6 @@ int				file_access_check(char *file);
 int				params_check(int argc, char **argv);
 int				assign_innoutfiles(t_pipe *pipex, int argc, char **argv);
 char			*get_env_var(char **envp, const char *name);
-
-
 
 // parsing
 int				count_commands(int argc);
@@ -109,6 +107,9 @@ int				is_quote(char c);
 char			**ft_split2(char const *s, char c);
 char			*ft_strjoin2(char *paths, char *cmd);
 void			remove_quotes(char **s);
+int				count_args(char **split);
+int				alloc_args(t_command *cmd, int num_args, char **split);
+int				copy_args(t_command *cmd, char **split);
 
 // init
 char			*find_command(char *cmd, char **envp);
@@ -122,7 +123,7 @@ void			free_split(char **split);
 void			free_commands(t_pipe *pipex);
 void			free_pipex(t_pipe *pipex);
 void			clean_house(t_pipe *pipex);
-
+int				ft_flush(t_command *cmd, char **split);
 // debug
 void			print_info(t_pipe *pipex);
 void			exit_error(t_pipe *pipex, char *msg);

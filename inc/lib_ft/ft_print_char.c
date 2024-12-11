@@ -6,11 +6,12 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 19:56:07 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 20:55:15 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:39:59 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
 /* print char
 wrapper function to print char
 prints a character and increments the number of characters printed
@@ -46,26 +47,26 @@ void	ft_print_char(t_data *data, int c)
 	}
 }
 
-void    ft_print_char_fd(t_data *data, int c, int fd)
+void	ft_print_char_fd(t_data *data, int c, int fd)
 {
-    int	padding;
+	int	padding;
 
-    padding = 0;
-    data->format.zero_padding = 0;
-    if (data->format.width > 1)
-        padding = data->format.width - 1;
-    if (padding > 0)
-    {
-        if (!data->format.minus_sign)
-            ft_print_padding_fd(data, padding, ' ', fd);
-        if (ft_write_fd(c, fd) >= 0)
-            data->chars_printed++;
-        if (data->format.minus_sign)
-            ft_print_padding_fd(data, padding, ' ', fd);
-    }
-    else
-    {
-        if (ft_write_fd(c, fd) >= 0)
-            data->chars_printed++;
-    }
+	padding = 0;
+	data->format.zero_padding = 0;
+	if (data->format.width > 1)
+		padding = data->format.width - 1;
+	if (padding > 0)
+	{
+		if (!data->format.minus_sign)
+			ft_print_padding_fd(data, padding, ' ', fd);
+		if (ft_write_fd(c, fd) >= 0)
+			data->chars_printed++;
+		if (data->format.minus_sign)
+			ft_print_padding_fd(data, padding, ' ', fd);
+	}
+	else
+	{
+		if (ft_write_fd(c, fd) >= 0)
+			data->chars_printed++;
+	}
 }

@@ -6,12 +6,13 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 18:18:54 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 20:43:31 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:36:23 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/*
 void	print_info(t_pipe *pipex)
 {
 	int	i;
@@ -41,11 +42,12 @@ void	print_info(t_pipe *pipex)
 	ft_printf("\n\033[1;37m-----------------\033[0m\n\n");
 	ft_printf("\033[1;32mdone\033[0m\n");
 }
+*/
 
-void exit_error(t_pipe *pipex, char *msg)
+void	exit_error(t_pipe *pipex, char *msg)
 {
-    ft_printf_fd(2, "\033[1;31m%s\033[0m\n", msg);
-    if (pipex)
-        clean_house(pipex);
-    exit(1);
+	ft_printf_fd(2, "\033[1;31m%s\033[0m\n", msg);
+	if (pipex)
+		clean_house(pipex);
+	exit(1);
 }

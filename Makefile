@@ -23,15 +23,32 @@ POSTCC = -I $(INC_DIR) -I $(LIB_DIR)
 SRC_DIR = ./src
 OBJ_DIR = ./obj
 INC_DIR = ./inc
-BONUS_DIR = ./bonus
 LIB_DIR = $(INC_DIR)/lib_ft
 
 # Rule to build the included library
 LIBS = $(LIB_DIR)/libft.a
 
 # Source and bonus files
-SRC_FILES = $(shell find $(SRC_DIR) -name "*.c")
-BONUS_FILES = $(shell find $(BONUS_DIR) -name "*.c")
+SRC_FILES = $(SRC_DIR)/free_utils.c\
+			$(SRC_DIR)/parse_utils2.c\
+			$(SRC_DIR)/here_doc.c\
+			$(SRC_DIR)/here_doc_utils.c\
+			$(SRC_DIR)/main.c\
+			$(SRC_DIR)/parse_utils4.c\
+			$(SRC_DIR)/here_doc_utils2.c\
+			$(SRC_DIR)/checker_utils.c\
+			$(SRC_DIR)/checker_utils_hd.c\
+			$(SRC_DIR)/parse_utils3.c\
+			$(SRC_DIR)/pipe_utils.c\
+			$(SRC_DIR)/pipe_utils2.c\
+			$(SRC_DIR)/pipex.c\
+			$(SRC_DIR)/security.c\
+			$(SRC_DIR)/validation.c\
+			$(SRC_DIR)/init_utils.c\
+			$(SRC_DIR)/parse_utils.c\
+			$(SRC_DIR)/debug_utils.c\
+			$(SRC_DIR)/init_utils2.c
+
 
 # Object directory
 $(OBJ_DIR):
@@ -64,20 +81,13 @@ $(NAME): $(OBJ_DIR) $(OBJ_FILES)
 	@$(CC) $(CFLAGS) $(POSTCC)  $(OBJ_FILES) -o $(NAME) $(LIBS)
 	@echo "$(GREEN)Project built successfully.$(NOCOLOR)"
 
-# Rule to build bonus
-$(BONUS): $(OBJ_DIR) $(OBJ_FILES)
-	@echo "$(YELLOW)Building bonus...$(NOCOLOR)"
-	@$(CC) $(CFLAGS) $(POSTCC) $(OBJ_FILES) -o $(NAME)
-	@echo "$(GREEN)Bonus built successfully.$(NOCOLOR)"
+
 
 # build only the library
 libs: $(LIBS)
 
 # build the project
 build: $(LIBS) $(NAME)
-
-# build bonus
-bonus: $(LIBS) $(NAME) $(BONUS)
 
 # clean the object files
 clean:

@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 18:52:49 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/09 19:31:36 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:34:22 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	handle_hd(char *limiter, int fd)
 		exit_error(NULL, "Error: cannot create temporary file");
 	while (1)
 	{
-		ft_printf("heredoc> ");
+		ft_printf("theredoc> ");
 		line = get_next_line(0);
 		if (!line)
 			exit(1);
@@ -44,7 +44,7 @@ int	setup_heredoc(char *limiter)
 	if (fd == -1)
 		exit_error(NULL, "Error: cannot create temporary file");
 	handle_hd(limiter, fd);
-    fd = open(TEMP_FILE, O_RDONLY);
+	fd = open(TEMP_FILE, O_RDONLY);
 	if (fd == -1)
 	{
 		unlink(TEMP_FILE);

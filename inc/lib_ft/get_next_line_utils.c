@@ -6,13 +6,13 @@
 /*   By: joamiran <joamiran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:29:51 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/14 21:02:08 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:42:28 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	ft_strdup2(char *str, gnl_data *data)
+void	ft_strdup2(char *str, t_gnl_data *data)
 {
 	int	i;
 
@@ -39,7 +39,7 @@ void	ft_strdup2(char *str, gnl_data *data)
 		str[i++] = 0;
 }
 
-char	*append_buffer(gnl_data *data, char *buffer)
+char	*append_buffer(t_gnl_data *data, char *buffer)
 {
 	size_t	i;
 	char	*str;
@@ -66,13 +66,13 @@ char	*append_buffer(gnl_data *data, char *buffer)
 	return (str);
 }
 
-void	clean_all(char *buffer, gnl_data *data)
+void	clean_all(char *buffer, t_gnl_data *data)
 {
 	ft_strdup2(buffer, data);
 	free(data->line);
 }
 
-size_t	grab_len(char *buffer, gnl_data *data)
+size_t	grab_len(char *buffer, t_gnl_data *data)
 {
 	size_t	i;
 
@@ -87,7 +87,7 @@ size_t	grab_len(char *buffer, gnl_data *data)
 	return (i);
 }
 
-void	grab_line(char *buffer, gnl_data *data)
+void	grab_line(char *buffer, t_gnl_data *data)
 {
 	data->len = grab_len(buffer, data);
 	data->line = append_buffer(data, buffer);

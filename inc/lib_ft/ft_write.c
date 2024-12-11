@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 20:48:48 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 20:52:24 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:39:37 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ int	ft_write(int c)
 	return (write(1, &ch, 1));
 }
 
-int ft_write_fd(int c, int fd)
+int	ft_write_fd(int c, int fd)
 {
-    char	ch;
+	char	ch;
 
-    ch = (char)c;
-    return (write(fd, &ch, 1));
+	ch = (char)c;
+	return (write(fd, &ch, 1));
 }
-
-

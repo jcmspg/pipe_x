@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:06:25 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 18:37:27 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 18:20:32 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,42 +37,11 @@ int	set_commands(t_command *cmd, char *arg)
 	return (0);
 }
 
-static int	ft_flush(t_command *cmd, char **split)
+int	ft_flush(t_command *cmd, char **split)
 {
 	free_split(split);
 	free(cmd->cmd);
 	return (1);
-}
-
-int	set_args(t_command *cmd, char *arg)
-{
-	char	**split;
-	int		i;
-	int		num_args;
-
-	i = 0;
-	num_args = 0;
-	split = ft_split2(arg, ' ');
-	if (!split)
-		return (1);
-	while (split[num_args])
-		num_args++;
-	cmd->args = ft_calloc(sizeof(char *), num_args + 1);
-	if (!cmd->args)
-		return (ft_flush(cmd, split));
-	while (split[i])
-	{
-		cmd->args[i] = ft_strdup(split[i]);
-		if (!cmd->args[i])
-		{
-			free_split(cmd->args);
-			return (ft_flush(cmd, split));
-		}
-		i++;
-	}
-	cmd->args[i] = NULL;
-	free_split(split);
-	return (0);
 }
 
 int	set_comnargs(t_command *cmd, char *arg)

@@ -6,50 +6,11 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:03:47 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 20:47:02 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:48:28 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-char	*find_command(char *cmd, char **envp)
-{
-	char	*path;
-	char	**paths;
-	int		i;
-	int		j;
-
-	j = 0;
-	while (envp[j])
-	{
-		if (ft_strncmp(envp[j], "PATH=", 5) == 0)
-		{
-			paths = ft_split(envp[j] + 5, ':');
-			if (!paths)
-				return (NULL);
-			i = 0;
-			while (paths[i])
-			{
-				path = ft_strjoin2(paths[i], cmd);
-				if (!path)
-				{
-					free_split(paths);
-					return (NULL);
-				}
-				if (access(path, F_OK) == 0)
-				{
-					free_split(paths);
-					return (path);
-				}
-				free(path);
-				i++;
-			}
-			free_split(paths);
-		}
-		j++;
-	}
-	return (NULL);
-}
 
 t_command	*new_command(void)
 {
@@ -60,7 +21,7 @@ t_command	*new_command(void)
 		return (NULL);
 	cmd->args = NULL;
 	cmd->status = -1;
-    cmd->path = NULL;
+	cmd->path = NULL;
 	return (cmd);
 }
 

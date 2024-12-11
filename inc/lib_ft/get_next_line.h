@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/20 17:29:44 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/14 21:02:36 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:41:36 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,23 +26,23 @@
 
 typedef struct d_data
 {
-	size_t		bytes_read;
-	size_t		len;
-	size_t		full_len;
-	char		*line;
-	int			j;
-	int			newline;
-}	gnl_data;
+	size_t	bytes_read;
+	size_t	len;
+	size_t	full_len;
+	char	*line;
+	int		j;
+	int		newline;
+}			t_gnl_data;
 
-char	*get_next_line(int fd);
+char		*get_next_line(int fd);
 
 // struct operations
-void	clean_all(char *buffer, gnl_data *data);
+void		clean_all(char *buffer, t_gnl_data *data);
 
 // aux
-void	ft_strdup2(char *str, gnl_data *data);
-char	*append_buffer(gnl_data *data, char *buffer);
-size_t	grab_len(char *buffer, gnl_data *data);
-void	grab_line(char *buffer, gnl_data *data);
+void		ft_strdup2(char *str, t_gnl_data *data);
+char		*append_buffer(t_gnl_data *data, char *buffer);
+size_t		grab_len(char *buffer, t_gnl_data *data);
+void		grab_line(char *buffer, t_gnl_data *data);
 
 #endif

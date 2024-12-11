@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 14:16:23 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 21:23:53 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:39:28 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,7 @@ void			ft_print_xx_fd(t_data *data, unsigned int arg, int upcase,
 void			ft_print_percent_fd(t_data *data, int fd);
 int				ft_write_fd(int c, int fd);
 int				ft_write_str_fd(char *str, int len, int fd);
-void            ft_print_padding_fd(t_data *data, int padding, char c, int fd);
-int             ft_write_nbr_fd(int n, int fd);
-
+void			ft_print_padding_fd(t_data *data, int padding, char c, int fd);
+int				ft_write_nbr_fd(int n, int fd);
 
 #endif /* PRINTF_FT_H */

@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 16:57:54 by joamiran          #+#    #+#             */
-/*   Updated: 2024/11/14 21:01:35 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:41:55 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_next_line(int fd)
 {
 	static char	buffer[FOPEN_MAX][BUFFER_SIZE + 1];
-	gnl_data		data;
+	t_gnl_data	data;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FOPEN_MAX)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 19:38:10 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/03 21:41:03 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:45:23 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	free_pipex(t_pipe *pipex)
 
 void	clean_house(t_pipe *pipex)
 {
-//	close_pipes(pipex);
 	close(pipex->infile);
 	close(pipex->outfile);
 	free_pipex(pipex);
-}                 
-
+}

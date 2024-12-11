@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 22:53:26 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 21:06:08 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:38:43 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,30 +85,30 @@ void	ft_print_id(t_data *data, int n)
 		data->chars_printed += ft_write_nbr(abs_n);
 }
 
-void ft_print_id_fd(t_data *data, int n, int fd)
+void	ft_print_id_fd(t_data *data, int n, int fd)
 {
-    int padding;
-    int abs_n;
-    int pre_p;
-    int printd;
+	int	padding;
+	int	abs_n;
+	int	pre_p;
+	int	printd;
 
-    abs_n = n;
-    padding = calculate_padding(data, n);
-    handle_negative(&n, &abs_n);
-    pre_p = data->format.precision - ft_nbrlen(abs_n);
-    if (pre_p < 0)
-        pre_p = 0;
-    if (n == 0 && data->format.precision == 0)
-    {
-        ft_print_padding_fd(data, padding + 1, ' ', fd);
-        return ;
-    }
-    if (n >= 0 && data->format.space_inb4)
-    {
-        data->chars_printed += ft_write_fd(' ', fd);
-        padding--;
-    }
-    printd = handle_padding(data, &(t_padding_data){n, abs_n, padding, pre_p});
-    if (!printd)
-        data->chars_printed += ft_write_nbr_fd(abs_n, fd);
+	abs_n = n;
+	padding = calculate_padding(data, n);
+	handle_negative(&n, &abs_n);
+	pre_p = data->format.precision - ft_nbrlen(abs_n);
+	if (pre_p < 0)
+		pre_p = 0;
+	if (n == 0 && data->format.precision == 0)
+	{
+		ft_print_padding_fd(data, padding + 1, ' ', fd);
+		return ;
+	}
+	if (n >= 0 && data->format.space_inb4)
+	{
+		data->chars_printed += ft_write_fd(' ', fd);
+		padding--;
+	}
+	printd = handle_padding(data, &(t_padding_data){n, abs_n, padding, pre_p});
+	if (!printd)
+		data->chars_printed += ft_write_nbr_fd(abs_n, fd);
 }

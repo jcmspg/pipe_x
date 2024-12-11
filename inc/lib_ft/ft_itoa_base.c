@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 02:27:28 by joamiran          #+#    #+#             */
-/*   Updated: 2024/05/08 17:46:17 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:39:06 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ static int	ft_nbrlen_base(unsigned long nbr, int base)
 
 char	*ft_itoa_base(unsigned long value, int base)
 {
-	char			*str;
-	char			*base_string;
+	char		*str;
+	char		*base_string;
 	long long	nbr;
-	int				len;
+	int			len;
 
 	base_string = "0123456789abcdef";
 	if (base < 2 || base > 16)

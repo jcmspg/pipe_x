@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/05 20:16:52 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/10 21:05:40 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/11 17:40:15 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	calculate_padding(t_data *data, int n)
 	return (padding);
 }
 
-void ft_print_padding_fd(t_data *data, int padding, char c, int fd)
+void	ft_print_padding_fd(t_data *data, int padding, char c, int fd)
 {
-    while (padding-- > 0)
-        data->chars_printed += ft_write_fd(c, fd);
+	while (padding-- > 0)
+		data->chars_printed += ft_write_fd(c, fd);
 }

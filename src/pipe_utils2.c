@@ -6,7 +6,7 @@
 /*   By: joamiran <joamiran@student.42lisboa.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 20:51:33 by joamiran          #+#    #+#             */
-/*   Updated: 2024/12/11 21:49:04 by joamiran         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:53:34 by joamiran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	forking(t_pipe *pipex)
 
 	i = 0;
 	if (!pipex->cmds)
-        exit_error(pipex, "Error: no commands found");
+		exit_error(pipex, "Error: no commands found");
 	while (i < pipex->n_cmds)
 	{
 		pipex->cmds[i]->pid = fork();

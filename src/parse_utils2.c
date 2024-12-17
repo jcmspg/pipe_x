@@ -32,7 +32,7 @@ void	remove_quotes(char **split)
 	i = 0;
 	while (split[i])
 	{
-		len = strlen(split[i]);
+		len = ft_strlen(split[i]);
 		if (len > 1 && is_quote(split[i][0]) && split[i][0] == split[i][len
 			- 1])
 		{
